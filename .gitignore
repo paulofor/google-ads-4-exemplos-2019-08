@@ -1,0 +1,8 @@
+bin/*
+bin/
+/bin/
+/bin
+
+src/ads.properties
+/src/ads.properties
+

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.google.ads.googleads.examples.utils.CodeSampleParamsTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.785 sec - in com.google.ads.googleads.examples.utils.CodeSampleParamsTest
