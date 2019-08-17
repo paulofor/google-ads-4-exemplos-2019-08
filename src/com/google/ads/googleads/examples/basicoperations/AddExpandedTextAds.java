@@ -141,5 +141,8 @@ public class AddExpandedTextAds {
             "Expanded text ad created with resource name: %s%n", result.getResourceName());
       }
     }
+    
+    
+    
   }
 }

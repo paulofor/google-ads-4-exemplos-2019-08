@@ -44,19 +44,26 @@ import com.google.ads.googleads.v2.resources.Campaign;
 import com.google.ads.googleads.v2.resources.Campaign.AppCampaignSetting;
 import com.google.ads.googleads.v2.resources.Campaign.GeoTargetTypeSetting;
 import com.google.ads.googleads.v2.resources.Campaign.NetworkSettings;
+import com.google.ads.googleads.v2.resources.CampaignCriterion.Builder;
 import com.google.ads.googleads.v2.resources.CampaignBudget;
+import com.google.ads.googleads.v2.resources.CampaignCriterion;
+import com.google.ads.googleads.v2.resources.CampaignName;
+import com.google.ads.googleads.v2.resources.GeoTargetConstantName;
 import com.google.ads.googleads.v2.services.BiddingStrategyOperation;
 import com.google.ads.googleads.v2.services.BiddingStrategyServiceClient;
 import com.google.ads.googleads.v2.services.CampaignBudgetOperation;
 import com.google.ads.googleads.v2.services.CampaignBudgetServiceClient;
+import com.google.ads.googleads.v2.services.CampaignCriterionOperation;
+import com.google.ads.googleads.v2.services.CampaignCriterionServiceClient;
 import com.google.ads.googleads.v2.services.CampaignOperation;
 import com.google.ads.googleads.v2.services.CampaignServiceClient;
 import com.google.ads.googleads.v2.services.MutateBiddingStrategiesResponse;
 import com.google.ads.googleads.v2.services.MutateBiddingStrategyResult;
 import com.google.ads.googleads.v2.services.MutateCampaignBudgetsResponse;
+import com.google.ads.googleads.v2.services.MutateCampaignCriteriaResponse;
+import com.google.ads.googleads.v2.services.MutateCampaignCriterionResult;
 import com.google.ads.googleads.v2.services.MutateCampaignResult;
 import com.google.ads.googleads.v2.services.MutateCampaignsResponse;
-
 import com.google.api.ads.adwords.lib.client.AdWordsSession;
 import com.google.api.ads.adwords.lib.factory.AdWordsServicesInterface;
 import com.google.common.collect.ImmutableList;
@@ -130,8 +137,7 @@ public class AddCampaignsTst2 {
 	private static String addCampaignBudget(GoogleAdsClient googleAdsClient, long customerId) {
 		CampaignBudget budget = CampaignBudget.newBuilder()
 				.setName(StringValue.of("Interplanetary Cruise Budget #" + System.currentTimeMillis()))
-				.setDeliveryMethod(BudgetDeliveryMethod.STANDARD)
-				.setExplicitlyShared(BoolValue.of(false))
+				.setDeliveryMethod(BudgetDeliveryMethod.STANDARD).setExplicitlyShared(BoolValue.of(false))
 				.setAmountMicros(Int64Value.of(500_000)).build();
 
 		CampaignBudgetOperation op = CampaignBudgetOperation.newBuilder().setCreate(budget).build();
@@ -146,66 +152,7 @@ public class AddCampaignsTst2 {
 		}
 	}
 
-	/**
-	 * Runs the example.
-	 *
-	 * @param googleAdsClient the Google Ads API client.
-	 * @param customerId      the client customer ID.
-	 * @throws GoogleAdsException if an API request failed with one or more service
-	 *                            errors.
-	 */
-	private void runExample2(GoogleAdsClient googleAdsClient, long customerId) {
-
-		// Creates a single shared budget to be used by the campaigns added below.
-		String budgetResourceName = addCampaignBudget(googleAdsClient, customerId);
-
-		List<CampaignOperation> operations = new ArrayList<>(NUMBER_OF_CAMPAIGNS_TO_ADD);
-		
-		TargetCpa cpa = TargetCpa.newBuilder()
-				.setTargetCpaMicros(Int64Value.of(10_000_000L))
-				.build();
-
-		for (int i = 0; i < NUMBER_OF_CAMPAIGNS_TO_ADD; i++) {
-			// Configures the campaign network options
-			NetworkSettings networkSettings = NetworkSettings.newBuilder().setTargetGoogleSearch(BoolValue.of(true))
-					.setTargetSearchNetwork(BoolValue.of(true)).setTargetContentNetwork(BoolValue.of(false))
-					.setTargetPartnerSearchNetwork(BoolValue.of(false)).build();
-
-			// Creates the campaign.
-			Campaign campaign = Campaign.newBuilder()
-					.setName(StringValue.of("Interplanetary Cruise #" + System.currentTimeMillis()))
-					.setAdvertisingChannelType(AdvertisingChannelType.MULTI_CHANNEL)
-					.setAdvertisingChannelSubType(AdvertisingChannelSubType.APP_CAMPAIGN)
-					// Recommendation: Set the campaign to PAUSED when creating it to prevent
-					// the ads from immediately serving. Set to ENABLED once you've added
-					// targeting and the ads are ready to serve
-					.setStatus(CampaignStatus.PAUSED)
-					// Sets the bidding strategy and budget.
-					// .setManualCpc(ManualCpc.newBuilder().build())
-					.setCampaignBudget(StringValue.of(budgetResourceName))
-					//.setMaximizeConversionValue(
-					//		MaximizeConversionValue.newBuilder().setTargetRoas(DoubleValue.of(3.5)).build())
-					// Adds the networkSettings configured above.
-					// .setNetworkSettings(networkSettings)
-					// Optional: Sets the start & end dates.
-					.setTargetCpa(cpa)
-					.setStartDate(StringValue.of(new DateTime().plusDays(1).toString("yyyyMMdd")))
-					.setEndDate(StringValue.of(new DateTime().plusDays(30).toString("yyyyMMdd"))).build();
-
-			CampaignOperation op = CampaignOperation.newBuilder().setCreate(campaign).build();
-			operations.add(op);
-		}
-
-		try (CampaignServiceClient campaignServiceClient = googleAdsClient.getLatestVersion()
-				.createCampaignServiceClient()) {
-			MutateCampaignsResponse response = campaignServiceClient.mutateCampaigns(Long.toString(customerId),
-					operations);
-			System.out.printf("Added %d campaigns:%n", response.getResultsCount());
-			for (MutateCampaignResult result : response.getResultsList()) {
-				System.out.println(result.getResourceName());
-			}
-		}
-	}
+	
 
 	// ** Versao Nova
 
@@ -215,6 +162,10 @@ public class AddCampaignsTst2 {
 		String estrategiaNome = createBiddingStrategy(googleAdsClient, customerId);
 		List<CampaignOperation> operations = new ArrayList<>(1);
 
+		
+		//Location california = new Location();
+	    //california.setId(21137L);
+		
 		AppCampaignSetting universalSetting = AppCampaignSetting.newBuilder()
 				.setAppId(StringValue.of("com.labpixies.colordrips"))
 				.setAppStore(AppCampaignAppStore.GOOGLE_APP_STORE)
@@ -235,14 +186,11 @@ public class AddCampaignsTst2 {
 				.setStatus(CampaignStatus.PAUSED)
 				.setAdvertisingChannelType(AdvertisingChannelType.MULTI_CHANNEL)
 				.setAdvertisingChannelSubType(AdvertisingChannelSubType.APP_CAMPAIGN)
-				//.setBiddingStrategy(StringValue.of(estrategiaNome))
 				.setStartDate(StringValue.of(new DateTime().plusDays(1).toString("yyyyMMdd")))
 				.setEndDate(StringValue.of(new DateTime().plusYears(1).toString("yyyyMMdd")))
 				.setAppCampaignSetting(universalSetting).setGeoTargetTypeSetting(geoSetting)
 				.setTargetCpa(cpa)
 				.setCampaignBudget(StringValue.of(budgetResourceName))
-				//.setMaximizeConversionValue(
-		         //       MaximizeConversionValue.newBuilder().setTargetRoas(DoubleValue.of(3.5)).build())
 				.build();
 
 		
@@ -254,6 +202,7 @@ public class AddCampaignsTst2 {
 			System.out.printf("Added %d campaigns:%n", response.getResultsCount());
 			for (MutateCampaignResult result : response.getResultsList()) {
 				System.out.println(result.getResourceName());
+				montandoCriterios(googleAdsClient,customerId, result.getResourceName());
 			}
 		} catch (Exception e) {
 			System.out.println("Erro: " + e.getMessage());
@@ -264,37 +213,71 @@ public class AddCampaignsTst2 {
 		try (BiddingStrategyServiceClient biddingStrategyServiceClient = googleAdsClient.getLatestVersion()
 				.createBiddingStrategyServiceClient()) {
 
-			//TargetSpend targetSpend = TargetSpend.newBuilder()
-			//		.setCpcBidCeilingMicros(Int64Value.of(2_000_000L))
-			//		.setTargetSpendMicros(Int64Value.of(20_000_000L))
-			//		.build();
-			
+			// TargetSpend targetSpend = TargetSpend.newBuilder()
+			// .setCpcBidCeilingMicros(Int64Value.of(2_000_000L))
+			// .setTargetSpendMicros(Int64Value.of(20_000_000L))
+			// .build();
+
 			TargetSpend targetSpend = TargetSpend.newBuilder()
-					//.set.setCpcBidCeilingMicros(Int64Value.of(2_000_000L))
-					//.setTargetSpendMicros(Int64Value.of(20_000_000L))
-					.build();
-			
-			BiddingStrategy portfolioBiddingStrategy = BiddingStrategy.newBuilder()
-					.setName(StringValue.of("Maximize Clicks #" + System.currentTimeMillis()))
-					.setTargetSpend(targetSpend)
+					// .set.setCpcBidCeilingMicros(Int64Value.of(2_000_000L))
+					// .setTargetSpendMicros(Int64Value.of(20_000_000L))
 					.build();
 
+			BiddingStrategy portfolioBiddingStrategy = BiddingStrategy.newBuilder()
+					.setName(StringValue.of("Maximize Clicks #" + System.currentTimeMillis()))
+					.setTargetSpend(targetSpend).build();
+
 			BiddingStrategyOperation operation = BiddingStrategyOperation.newBuilder()
-					.setCreate(portfolioBiddingStrategy)
-					.build();
+					.setCreate(portfolioBiddingStrategy).build();
 
 			MutateBiddingStrategiesResponse response = biddingStrategyServiceClient
 					.mutateBiddingStrategies(Long.toString(customerId), Lists.newArrayList(operation));
 
 			MutateBiddingStrategyResult mutateBiddingStrategyResult = response.getResults(0);
 			// Prints the resource name of the created object.
-			System.out.printf("Created bidding strategy with resource name: '%s'.%n",	mutateBiddingStrategyResult.getResourceName());
+			System.out.printf("Created bidding strategy with resource name: '%s'.%n",
+					mutateBiddingStrategyResult.getResourceName());
 
 			return mutateBiddingStrategyResult.getResourceName();
 		} catch (Exception e) {
 			System.out.println("Erro Bidding: " + e.getMessage());
 			return null;
 		}
+	}
+
+	private static void montandoCriterios(GoogleAdsClient googleAdsClient, long customerId, String campaignResourceName) {
+		// String campaignResourceName = CampaignName.format(Long.toString(customerId),
+		// Long.toString(campaignId));
+
+		List<CampaignCriterionOperation> operations = ImmutableList.of(
+				//CampaignCriterionOperation.newBuilder().setCreate(buildLanguageIdCriterion(1014, campaignResourceName))
+				//		.build(),
+				CampaignCriterionOperation.newBuilder().setCreate(buildLocationIdCriterion(2076, campaignResourceName))
+						.build());
+
+		try (CampaignCriterionServiceClient campaignCriterionServiceClient = googleAdsClient.getLatestVersion()
+				.createCampaignCriterionServiceClient()) {
+			MutateCampaignCriteriaResponse response = campaignCriterionServiceClient
+					.mutateCampaignCriteria(Long.toString(customerId), operations);
+			System.out.printf("Added %d campaign criteria:%n", response.getResultsCount());
+			for (MutateCampaignCriterionResult result : response.getResultsList()) {
+				System.out.println(result.getResourceName());
+			}
+		}
+
+	}
+
+	private static CampaignCriterion buildLocationIdCriterion(long locationId, String campaignResourceName) {
+		Builder criterionBuilder = CampaignCriterion.newBuilder().setCampaign(StringValue.of(campaignResourceName));
+		criterionBuilder.getLocationBuilder()
+				.setGeoTargetConstant(StringValue.of(GeoTargetConstantName.format(String.valueOf(locationId))));
+		return criterionBuilder.build();
+	}
+	private static CampaignCriterion buildLanguageIdCriterion(long linguaId, String campaignResourceName) {
+		Builder criterionBuilder = CampaignCriterion.newBuilder().setCampaign(StringValue.of(campaignResourceName));
+		criterionBuilder.getLocationBuilder()
+				.setGeoTargetConstant(StringValue.of(GeoTargetConstantName.format(String.valueOf(linguaId))));
+		return criterionBuilder.build();
 	}
 
 }

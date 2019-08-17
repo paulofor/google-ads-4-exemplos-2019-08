@@ -415,5 +415,37 @@
 	<classpathentry kind="lib" path="lib/xmlunit-1.5.jar"/>
 	<classpathentry kind="lib" path="lib/xz-1.5.jar"/>
 	<classpathentry kind="lib" path="lib/xz-1.8.jar"/>
+	<classpathentry kind="lib" path="lib-old/java-json.jar"/>
+	<classpathentry kind="lib" path="lib-old/evo-inflector-1.2.1.jar"/>
+	<classpathentry kind="lib" path="lib-old/httpclient-4.0.1.jar"/>
+	<classpathentry kind="lib" path="lib-old/httpcore-4.0.1.jar"/>
+	<classpathentry kind="lib" path="lib-old/async-http-client-1.9.38.jar"/>
+	<classpathentry kind="lib" path="lib-old/commons-beanutils-1.9.2.jar"/>
+	<classpathentry kind="lib" path="lib-old/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="lib-old/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="lib-old/commons-configuration-1.10.jar"/>
+	<classpathentry kind="lib" path="lib-old/commons-discovery-0.4.jar"/>
+	<classpathentry kind="lib" path="lib-old/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="lib-old/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="lib-old/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib-old/guice-4.2.2.jar"/>
+	<classpathentry kind="lib" path="lib-old/guice-assistedinject-4.2.2.jar"/>
+	<classpathentry kind="lib" path="lib-old/guice-multibindings-4.2.2.jar"/>
+	<classpathentry kind="lib" path="lib-old/jackson-core-2.1.3.jar"/>
+	<classpathentry kind="lib" path="lib-old/javax.inject-1.jar"/>
+	<classpathentry kind="lib" path="lib-old/jaxrpc-api-1.1.jar"/>
+	<classpathentry kind="lib" path="lib-old/jcommander-1.48.jar"/>
+	<classpathentry kind="lib" path="lib-old/joda-time-2.8.2.jar"/>
+	<classpathentry kind="lib" path="lib-old/jsr305-1.3.9.jar"/>
+	<classpathentry kind="lib" path="lib-old/aopalliance-1.0.jar"/>
+	<classpathentry kind="lib" path="lib-old/axis-1.4.jar"/>
+	<classpathentry kind="lib" path="lib-old/guava-20.0.jar"/>
+	<classpathentry kind="lib" path="lib-old/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="lib-old/netty-3.10.5.Final.jar"/>
+	<classpathentry kind="lib" path="lib-old/opencsv-1.8.jar"/>
+	<classpathentry kind="lib" path="lib-old/slf4j-api-1.7.7.jar"/>
+	<classpathentry kind="lib" path="lib-old/slf4j-log4j12-1.7.7.jar"/>
+	<classpathentry kind="lib" path="lib-old/txw2-2.3.2.jar"/>
+	<classpathentry kind="lib" path="lib-old/wsdl4j-1.6.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

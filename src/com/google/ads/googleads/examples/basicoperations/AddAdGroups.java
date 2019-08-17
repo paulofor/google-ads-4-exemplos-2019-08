@@ -130,5 +130,7 @@ public class AddAdGroups {
         System.out.println(result.getResourceName());
       }
     }
+    
+    
   }
 }
