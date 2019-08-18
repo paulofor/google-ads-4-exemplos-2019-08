@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.ads.googleads.lib.GoogleAdsClient;
-import com.google.ads.googleads.v2.common.ExpandedTextAdInfo;
+import com.google.ads.googleads.v2.common.AdTextAsset;
+import com.google.ads.googleads.v2.common.AppAdInfo;
 import com.google.ads.googleads.v2.common.TargetCpa;
 import com.google.ads.googleads.v2.enums.AdGroupAdStatusEnum.AdGroupAdStatus;
 import com.google.ads.googleads.v2.enums.AdGroupStatusEnum.AdGroupStatus;
-import com.google.ads.googleads.v2.enums.AdGroupTypeEnum.AdGroupType;
 import com.google.ads.googleads.v2.enums.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType;
 import com.google.ads.googleads.v2.enums.AdvertisingChannelTypeEnum.AdvertisingChannelType;
 import com.google.ads.googleads.v2.enums.AppCampaignAppStoreEnum.AppCampaignAppStore;
@@ -46,7 +46,6 @@ import com.google.ads.googleads.v2.services.MutateCampaignCriteriaResponse;
 import com.google.ads.googleads.v2.services.MutateCampaignCriterionResult;
 import com.google.ads.googleads.v2.services.MutateCampaignResult;
 import com.google.ads.googleads.v2.services.MutateCampaignsResponse;
-import com.google.ads.googleads.v2.utils.ResourceNames;
 import com.google.common.collect.ImmutableList;
 import com.google.protobuf.BoolValue;
 import com.google.protobuf.Int64Value;
@@ -188,7 +187,6 @@ public class CampanhaAppAdsNovoService extends AdsService {
 	            .setName(StringValue.of("Earth to Mars Cruises #" + System.currentTimeMillis()))
 	            .setStatus(AdGroupStatus.ENABLED)
 	            .setCampaign(StringValue.of(campaignResourceName))
-	            .set
 	            .build();
 
 	  
@@ -205,43 +203,44 @@ public class CampanhaAppAdsNovoService extends AdsService {
 	    }
 	  
 	}
-	
+
 	private void adicionaAnuncio(GoogleAdsClient googleAdsClient, long customerId, String adGroupResourceName) {
 		List<AdGroupAdOperation> operations = new ArrayList<>();
-	    for (int i = 0; i < 1; i++) {
-	    	// Creates the expanded text ad info.
-		    ExpandedTextAdInfo expandedTextAdInfo =
-		          ExpandedTextAdInfo.newBuilder()
-		              .setHeadlinePart1(StringValue.of(String.format("Cruise #%d to Mars", i)))
-		              .setHeadlinePart2(StringValue.of("Best Space Cruise Line"))
-		              .setDescription(StringValue.of("Buy your tickets now!"))
-		              .build();
+		for (int i = 0; i < 1; i++) {
+			AdTextAsset titulo1 = AdTextAsset.newBuilder().setText(StringValue.of(this.campanha.getAnuncioAplicativo().getTitulo1())).build();
+			AdTextAsset titulo2 = AdTextAsset.newBuilder().setText(StringValue.of(this.campanha.getAnuncioAplicativo().getTitulo2())).build();
+			AdTextAsset titulo3 = AdTextAsset.newBuilder().setText(StringValue.of(this.campanha.getAnuncioAplicativo().getTitulo3())).build();
+			AdTextAsset titulo4 = AdTextAsset.newBuilder().setText(StringValue.of(this.campanha.getAnuncioAplicativo().getTitulo4())).build();
 
-		    // Wraps the info in an Ad object.
-		    Ad ad =
-		    	Ad.newBuilder()
-	              .setExpandedTextAd(expandedTextAdInfo)
-	              .addFinalUrls(StringValue.of("http://www.example.com"))
-	              .build();
+			// Creates the expanded text ad info.
+			AppAdInfo appAd = AppAdInfo.newBuilder()
+					.addHeadlines(titulo1)
+					.addHeadlines(titulo2)
+					.addDescriptions(titulo3)
+					.addDescriptions(titulo4)
+					.build();
+			
 
-	      // Builds the final ad group ad representation.
-	      AdGroupAd adGroupAd =
-	          AdGroupAd.newBuilder()
-	              .setAdGroup(StringValue.of(adGroupResourceName))
-	              .setStatus(AdGroupAdStatus.PAUSED)
-	              .setAd(ad)
-	              .build();
+			Ad ad = Ad.newBuilder().setAppAd(appAd).build();
 
-	      AdGroupAdOperation op = AdGroupAdOperation.newBuilder().setCreate(adGroupAd).build();
-	      operations.add(op);
-	    }
+			// Builds the final ad group ad representation.
+			AdGroupAd adGroupAd = AdGroupAd.newBuilder()
+					.setAdGroup(StringValue.of(adGroupResourceName))
+					.setAd(ad)
+					.build();
 
-	    try (AdGroupAdServiceClient adGroupAdServiceClient = googleAdsClient.getLatestVersion().createAdGroupAdServiceClient()) {
-		      MutateAdGroupAdsResponse response = adGroupAdServiceClient.mutateAdGroupAds(Long.toString(customerId), operations);
-		      for (MutateAdGroupAdResult result : response.getResultsList()) {
-		        System.out.printf("Expanded text ad created with resource name: %s%n", result.getResourceName());
-		      }
+			AdGroupAdOperation op = AdGroupAdOperation.newBuilder().setCreate(adGroupAd).build();
+			operations.add(op);
 		}
-		   
+
+		try (AdGroupAdServiceClient adGroupAdServiceClient = googleAdsClient.getLatestVersion()
+				.createAdGroupAdServiceClient()) {
+			MutateAdGroupAdsResponse response = adGroupAdServiceClient.mutateAdGroupAds(Long.toString(customerId),
+					operations);
+			for (MutateAdGroupAdResult result : response.getResultsList()) {
+				System.out.printf("Adicionou anuncio: %s%n", result.getResourceName());
+			}
+		}
+
 	}
 }
