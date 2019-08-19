@@ -5,8 +5,7 @@ import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
 
-import br.com.digicom.adsservice.CampanhaAdsService;
-import br.com.digicom.adsservice.CampanhaAplicacaoService;
+
 import br.com.digicom.adsservice.CampanhaAppAdsNovoService;
 import br.com.digicom.modelo.CampanhaAds;
 import br.com.digicom.modelo.CampanhaAnuncioResultado;
@@ -19,29 +18,27 @@ public class IntegracaoMundo {
 	RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 
 	public void criaCampanhaSemSalvar(CampanhaAds campanha) {
-		CampanhaAdsService servico = new CampanhaAdsService();
+		CampanhaAppAdsNovoService servico = new CampanhaAppAdsNovoService();
 		servico.cria(campanha);
 		// campanha.resetSetupCampanha();
 	}
 
 	public void criaCampanhaLista(List<CampanhaAds> objects) {
 		for (CampanhaAds campanha : objects) {
-			//if (campanha.getAnuncioAplicativo() != null) {
-			//	criaCampanhaAplicacao(campanha);
-			//} else {
-			//	criaCampanhaGeral(campanha);
-			//}
-			criaCampanhaNova(campanha);
+			if (campanha.getAnuncioAplicativo() != null) {
+				criaCampanhaAplicacao(campanha);
+			} else {
+				criaCampanhaGeral(campanha);
+			}
 		}
 	}
 	
 	private void criaCampanhaNova(CampanhaAds campanha) {
-		CampanhaAppAdsNovoService servico = new CampanhaAppAdsNovoService();
-		servico.cria(campanha);
+		
 	}
 	
 	public void criaCampanhaAplicacao(CampanhaAds campanha) {
-		CampanhaAplicacaoService servico = new CampanhaAplicacaoService();
+		CampanhaAppAdsNovoService servico = new CampanhaAppAdsNovoService();
 		servico.cria(campanha);
 		System.out.println("IdAds: " + campanha.getIdAds());
 		campanha.setDataPublicacao(Util.getDataAtualLoopback());
@@ -62,6 +59,7 @@ public class IntegracaoMundo {
 	}
 
 	public void criaCampanhaGeral(CampanhaAds campanha) {
+		/*
 		CampanhaAplicacaoService servico = new CampanhaAplicacaoService();
 		servico.cria(campanha);
 		System.out.println("IdAds: " + campanha.getIdAds());
@@ -82,6 +80,7 @@ public class IntegracaoMundo {
 		});
 		salvaAnuncioCampanha(campanha);
 		salvaPalavraChaveCampanha(campanha);
+		*/
 	}
 
 	private void salvaAnuncioCampanha(CampanhaAds campanha) {
@@ -132,6 +131,7 @@ public class IntegracaoMundo {
 		}
 	}
 
+	/*
 	public void atualizaCampanha(final CampanhaAds item) {
 		CampanhaAdsService servico = new CampanhaAdsService();
 		item.save(new VoidCallback() {
@@ -148,8 +148,8 @@ public class IntegracaoMundo {
 			}
 
 		});
-
 	}
+	*/
 
 	public void atualizaAnuncio(CampanhaAnuncioResultado item) {
 		item.save(new VoidCallback() {

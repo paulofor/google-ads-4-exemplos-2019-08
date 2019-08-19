@@ -184,7 +184,7 @@ public class CampanhaAppAdsNovoService extends AdsService {
 	    // Creates an ad group, setting an optional CPC value.
 	    AdGroup adGroup1 =
 	        AdGroup.newBuilder()
-	            .setName(StringValue.of("Earth to Mars Cruises #" + System.currentTimeMillis()))
+	            .setName(StringValue.of(campanha.getNome() + "_Grp_" + System.currentTimeMillis()))
 	            .setStatus(AdGroupStatus.ENABLED)
 	            .setCampaign(StringValue.of(campaignResourceName))
 	            .build();
