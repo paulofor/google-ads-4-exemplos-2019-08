@@ -91,7 +91,7 @@ public class GetCampaignsTst {
           SearchGoogleAdsRequest.newBuilder()
               .setCustomerId(Long.toString(customerId))
               .setPageSize(PAGE_SIZE)
-              .setQuery("SELECT campaign.id, campaign.name FROM campaign where campaign.id = 6452956228")
+              .setQuery("SELECT campaign.id, campaign.name FROM campaign where campaign.id = 6455404024")
               .build();
       // Issues the search request.
       SearchPagedResponse searchPagedResponse = googleAdsServiceClient.search(request);

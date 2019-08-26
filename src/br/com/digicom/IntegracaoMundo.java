@@ -185,4 +185,24 @@ public class IntegracaoMundo {
 		});
 	}
 
+	public void atualizaCampanha(final CampanhaAds item) {
+		
+		item.save(new VoidCallback() {
+			@Override
+			public void onSuccess() {
+				// TODO Auto-generated method stub
+				System.out.print("sucesso" + item.getId());
+			}
+
+			@Override
+			public void onError(Throwable t) {
+				// TODO Auto-generated method stub
+				t.printStackTrace();
+			}
+
+		});
+
+		
+	}
+
 }
