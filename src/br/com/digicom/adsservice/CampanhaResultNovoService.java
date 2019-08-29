@@ -55,6 +55,7 @@ public class CampanhaResultNovoService extends AdsService{
 				averageCpc = averageCpc / 1000000;
 				Double converions = googleAdsRow.getMetrics().getConversions().getValue();
 				Double conversionRate = googleAdsRow.getMetrics().getConversionsFromInteractionsRate().getValue();
+				conversionRate = conversionRate * 100;
 				Double costPerConversion = googleAdsRow.getMetrics().getCostPerConversion().getValue();
 				costPerConversion = costPerConversion / 1000000;
 				campanhaResult.setOrcamentoTotalExecutado(custo);
