@@ -7,7 +7,7 @@ public class AnuncioAplicativo {
 	private String titulo3;
 	private String titulo4;
 	
-	private String pacoteApp;
+	//private String pacoteApp;
 
 	public String getTitulo1() {
 		return titulo1;

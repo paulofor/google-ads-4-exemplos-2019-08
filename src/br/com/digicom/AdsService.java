@@ -42,12 +42,12 @@ public abstract class AdsService {
 		System.setProperty("https.proxyHost", "10.21.7.10");
 		System.setProperty("https.proxyPort", "82");
 		System.setProperty("https.proxyUser", "tr626987");
-		System.setProperty("https.proxyPassword", "Jenlop01");
+		System.setProperty("https.proxyPassword", "Lafiti23");
 
 		System.setProperty("http.proxyHost", "10.21.7.10");
 		System.setProperty("http.proxyPort", "82");
 		System.setProperty("http.proxyUser", "tr626987");
-		System.setProperty("http.proxyPassword", "Jenlop01");
+		System.setProperty("http.proxyPassword", "Lafiti23");
 
 		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("10.21.7.10", 82));
 		HttpTransport httpTransport = new NetHttpTransport.Builder().setProxy(proxy).build();
@@ -57,7 +57,7 @@ public abstract class AdsService {
 				// check that the pasword-requesting site is the proxy server
 				if (this.getRequestingHost().contains("10.21.7.10") && this.getRequestingPort() == 82
 						&& this.getRequestorType().equals(RequestorType.PROXY)) {
-					return new PasswordAuthentication("tr626987", "Jenlop01".toCharArray());
+					return new PasswordAuthentication("tr626987", "Lafiti23".toCharArray());
 				}
 				return super.getPasswordAuthentication();
 			}
@@ -69,7 +69,8 @@ public abstract class AdsService {
 	protected void executa() {
 		AddCampaignsParams params = new AddCampaignsParams();
 		params.customerId = Long.parseLong("5328916093");
-
+		setProxy();
+		
 		GoogleAdsClient googleAdsClient;
 		try {
 			googleAdsClient = GoogleAdsClient.newBuilder().fromPropertiesFile().build();
