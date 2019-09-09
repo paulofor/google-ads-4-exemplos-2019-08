@@ -41,13 +41,14 @@ public class AnuncioAplicativo {
 		this.titulo4 = titulo4;
 	}
 
+	/*
 	public String getPacoteApp() {
 		return pacoteApp;
 	}
-
 	public void setPacoteApp(String pacoteApp) {
 		this.pacoteApp = pacoteApp;
 	}
+	*/
 	
 	
 }

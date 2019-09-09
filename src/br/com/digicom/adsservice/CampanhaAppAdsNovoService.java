@@ -72,7 +72,7 @@ public class CampanhaAppAdsNovoService extends AdsService {
 		
 		
 		AppCampaignSetting universalSetting = AppCampaignSetting.newBuilder()
-				.setAppId(StringValue.of(this.campanha.getAnuncioAplicativo().getPacoteApp()))
+				.setAppId(StringValue.of(this.campanha.getVersaoApp().getPacoteApp()))
 				.setAppStore(AppCampaignAppStore.GOOGLE_APP_STORE)
 				.setBiddingStrategyGoalType(AppCampaignBiddingStrategyGoalType.OPTIMIZE_INSTALLS_TARGET_INSTALL_COST)
 				.build();

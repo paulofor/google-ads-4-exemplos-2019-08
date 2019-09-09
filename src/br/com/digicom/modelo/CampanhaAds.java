@@ -47,7 +47,7 @@ public class CampanhaAds extends Model{
 	
 	
 	private AnuncioAplicativo anuncioAplicativo;
-	
+	private VersaoApp versaoApp; 
 	
 	
 	
@@ -354,6 +354,20 @@ public class CampanhaAds extends Model{
 	public void setSetupCampanhaId(Integer setupCampanhaId) {
 		this.setupCampanhaId = setupCampanhaId;
 	}
+
+
 	
+	
+	// ** VERSAO APLICATIVO **
+	public VersaoApp getVersaoApp() {
+		return versaoApp;
+	}
+	public void setVersaoApp(Object versaoApp) {
+		this.versaoApp = new VersaoApp();
+		BeanUtil.setProperties(this.versaoApp, (Map<String, ? extends Object>) versaoApp, true);
+	}
+	public void resetVersaoApp() {
+		this.versaoApp = null;
+	}
 
 }
