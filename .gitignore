@@ -3,6 +3,12 @@ bin/
 /bin/
 /bin
 
+dist/*
+dist/
+/dist/
+/dist
+
+
 src/ads.properties
 /src/ads.properties
 
