@@ -8,6 +8,10 @@ dist/
 /dist/
 /dist
 
+exec/*
+exec/
+/exec/
+/exec
 
 src/ads.properties
 /src/ads.properties
