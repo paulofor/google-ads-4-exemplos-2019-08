@@ -156,6 +156,13 @@ public class CampanhaAppAdsNovoService extends AdsService {
 		return criterionBuilder.build();
 	}
 	
+	private static CampaignCriterion buildLanguageIdCriterion2(long linguaId, String campaignResourceName) {
+		Builder criterionBuilder = CampaignCriterion.newBuilder().setCampaign(StringValue.of(campaignResourceName));
+		criterionBuilder.getAdScheduleBuilder().getLanguageBuilder()
+				.setLanguageConstant(StringValue.of(LanguageConstantName.format(String.valueOf(linguaId))));
+		return criterionBuilder.build();
+	}
+	
 	
 	
 	private String addCampaignBudget(GoogleAdsClient googleAdsClient, long customerId) {
