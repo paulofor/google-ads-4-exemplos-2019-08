@@ -22,6 +22,17 @@ public class UtilAds {
 		return converteData(getDataFinalCal());
 	}
 	
+	private String getDataInicialDB() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dia = sdf.format(getDataInicialCal().getTime());
+		return dia;
+	}
+	private String getDataFinalDB() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String dia = sdf.format(getDataFinalCal().getTime());
+		return dia;
+	}
+	
 	
 	private static Calendar getDataInicialCal() {
 		Calendar date1 = Calendar.getInstance();

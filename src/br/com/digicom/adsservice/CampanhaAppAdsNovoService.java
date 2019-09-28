@@ -111,6 +111,8 @@ public class CampanhaAppAdsNovoService extends AdsService {
 			for (MutateCampaignResult result : response.getResultsList()) {
 				System.out.println(result.getResourceName());
 				campanha.setIdAds(getIdAds(result));
+				campanha.setDataInicial(UtilAds.getDataInicial());
+				campanha.setDataFinal(UtilAds.getDataFinal());
 				montandoCriterios(googleAdsClient,customerId, result.getResourceName());
 				adicionaGrupo(googleAdsClient,customerId, result.getResourceName());
 			}
@@ -156,12 +158,7 @@ public class CampanhaAppAdsNovoService extends AdsService {
 		return criterionBuilder.build();
 	}
 	
-	private static CampaignCriterion buildLanguageIdCriterion2(long linguaId, String campaignResourceName) {
-		Builder criterionBuilder = CampaignCriterion.newBuilder().setCampaign(StringValue.of(campaignResourceName));
-		criterionBuilder.getAdScheduleBuilder().getLanguageBuilder()
-				.setLanguageConstant(StringValue.of(LanguageConstantName.format(String.valueOf(linguaId))));
-		return criterionBuilder.build();
-	}
+	
 	
 	
 	
