@@ -69,7 +69,7 @@ public abstract class AdsService {
 	protected void executa() {
 		AddCampaignsParams params = new AddCampaignsParams();
 		params.customerId = Long.parseLong("5328916093");
-		setProxy();
+		//setProxy();
 		
 		GoogleAdsClient googleAdsClient;
 		try {

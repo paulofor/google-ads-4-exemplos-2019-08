@@ -417,7 +417,7 @@ public class RestAdapter extends Adapter {
 
    
             ProxyServer proxy = new ProxyServer("10.21.7.10",82, "tr626987", "Lafiti23");
-            request.setProxyServer(proxy);
+            //request.setProxyServer(proxy);
             
             if ("GET".equalsIgnoreCase(method)) {
             	
