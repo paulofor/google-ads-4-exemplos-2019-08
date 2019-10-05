@@ -98,6 +98,48 @@ public class ObtemResultadoCampanhaTst {
 		    	   " metrics.conversions, metrics.conversions_from_interactions_rate, metrics.cost_per_conversion " +
 			       " FROM campaign where campaign.id = 6455404024";
 		    
+		    
+		    // como obter os anuncios/grupos de uma campanha
+		    query = " SELECT campaign.name " 
+		    		+ " FROM ad_group "
+		    		+ " Where campaign.id = 6455404024";
+		    
+		    
+		    // Pegar grupo
+		    query = " SELECT "
+		    		+ " ad_group.name, "
+		    		+ " ad_group.id, "
+		    		+ " metrics.impressions, "
+		    		+ " metrics.clicks "
+		    		+ " FROM ad_group "
+		    		+ " Where campaign.id = 6455404024";
+		    // Anuncio de grupo -- 77477067535
+		    
+		    // Pegar grupo
+		    query = " SELECT "
+		    		+ " ad_group.name, "
+		    		+ " ad_group.id, "
+		    		+ " metrics.impressions, "
+		    		+ " metrics.clicks "
+		    		+ " FROM ad "
+		    		+ " Where ad_group.id = 77477067535";
+		    
+		    query =
+		            "SELECT ad_group.id, "
+		                + "ad_group_ad.ad.id, "
+		                + "ad_group_ad.ad.app_add_info.headline_part1, "
+		                //+ "ad_group_ad.ad.expanded_text_ad.headline_part2, "
+		                + "ad_group_ad.status "
+		                + "FROM ad_group_ad "
+		                + "WHERE ad_group.id = 77477067535 ";
+		    
+		    // 378561703642
+		    String query2 = " SELECT "
+		    		+ " metrics.impressions, "
+		    		+ " metrics.clicks "
+		    		+ " FROM ads "
+		    		+ " Where ads.id = 378561703642";
+		    
 			
 			SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
 					.setCustomerId(Long.toString(customerId)).setPageSize(PAGE_SIZE)
