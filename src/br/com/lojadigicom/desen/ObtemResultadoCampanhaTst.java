@@ -114,7 +114,7 @@ public class ObtemResultadoCampanhaTst {
 					+ " FROM ad_group " + " Where campaign.id = 6455404024";
 			// Anuncio de grupo -- 77477067535
 
-			// Pegar grupo
+			// Pegar grupo --> totais do grupo.
 			String queryGrupo = " SELECT " + " ad_group.name, " + " ad_group.id, " + " metrics.impressions, " + " metrics.clicks "
 					+ " FROM ad_group " + " Where ad_group.id = 77477067535";
 
