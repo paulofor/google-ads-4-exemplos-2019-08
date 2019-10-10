@@ -46,7 +46,7 @@ public class ObtemResultadoCampanhaTst {
 	}
 
 	public static void main(String[] args) throws IOException {
-		setProxy();
+		//setProxy();
 		GetCampaignsWithStatsParams params = new GetCampaignsWithStatsParams();
 		if (!params.parseArguments(args)) {
 			params.customerId = Long.parseLong("5328916093");
@@ -118,6 +118,10 @@ public class ObtemResultadoCampanhaTst {
 			String queryGrupo = " SELECT " + " ad_group.name, " + " ad_group.id, " + " metrics.impressions, " + " metrics.clicks "
 					+ " FROM ad_group " + " Where ad_group.id = 77477067535";
 
+			String queryAd = " SELECT " + " metrics.impressions, metrics.clicks "
+					+ " FROM ad Where ad_group.id = 77477067535";
+			
+			
 			query = "SELECT ad_group.id, " + "ad_group_ad.ad.id, " + "ad_group_ad.ad.app_add_info.headline_part1, "
 			// + "ad_group_ad.ad.expanded_text_ad.headline_part2, "
 					+ "ad_group_ad.status " + "FROM ad_group_ad " + "WHERE ad_group.id = 77477067535 ";
@@ -125,10 +129,10 @@ public class ObtemResultadoCampanhaTst {
 			// 378561703642
 			String query2 = " SELECT " + " metrics.impressions, " + " metrics.clicks " + " FROM ads "
 					+ " Where ads.id = 378561703642";
-			System.out.println(queryGrupo);
+			//System.out.println(queryGrupo);
 
 			SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
-					.setCustomerId(Long.toString(customerId)).setPageSize(PAGE_SIZE).setQuery(queryGrupo).build();
+					.setCustomerId(Long.toString(customerId)).setPageSize(PAGE_SIZE).setQuery(queryAd).build();
 
 			SearchPagedResponse searchPagedResponse = googleAdsServiceClient.search(request);
 
