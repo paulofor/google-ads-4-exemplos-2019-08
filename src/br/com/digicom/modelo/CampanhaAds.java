@@ -12,6 +12,7 @@ public class CampanhaAds extends Model{
 	
 	private List<CampanhaPalavraChaveResultado> campanhaPalavraChaveResultados;
 	private List<CampanhaAnuncioResultado> campanhaAnuncioResultados;
+	private List<AnuncioAplicacaoResultado> anuncioAplicacaoResultado;
 	
 	private String nome;
 	private String idAds;
@@ -48,6 +49,7 @@ public class CampanhaAds extends Model{
 	
 	private AnuncioAplicativo anuncioAplicativo;
 	private VersaoApp versaoApp; 
+	//private AnuncioAplicacaoResultado anuncioAplicacaoResultado;
 	
 	
 	
@@ -139,6 +141,21 @@ public class CampanhaAds extends Model{
 		this.setupCampanha = null;
 	}
 
+	
+	public List<AnuncioAplicacaoResultado> getAnuncioAplicacaoResultados() {
+		return anuncioAplicacaoResultado;
+	}
+
+	public void setAnuncioAplicacaoResultados(List<AnuncioAplicacaoResultado> anuncioAplicacaoResultado) {
+		this.anuncioAplicacaoResultado = new ArrayList<AnuncioAplicacaoResultado>();
+		for (int i=0; i<anuncioAplicacaoResultado.size(); i++) {
+			Object objeto = new AnuncioAplicacaoResultado();
+			BeanUtil.setProperties(objeto, (Map<String, ? extends Object>) anuncioAplicacaoResultado.get(i), true);
+			this.anuncioAplicacaoResultado.add((AnuncioAplicacaoResultado) objeto);
+		}
+
+	}
+	
 	
 	
 	public List<CampanhaPalavraChaveResultado> getCampanhaPalavraChaveResultados() {
