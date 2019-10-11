@@ -45,7 +45,7 @@ public class CampanhaAds extends Model {
 
 	private AnuncioAplicativo anuncioAplicativo;
 	private VersaoApp versaoApp;
-	private AnuncioAplicacaoResultado anuncioAplicacaoResultado;
+	//private AnuncioAplicacaoResultado anuncioAplicacaoResultado;
 
 	public Integer getAnuncioAplicativoId() {
 		return anuncioAplicativoId;
