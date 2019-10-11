@@ -44,6 +44,7 @@ public class IntegracaoMundo {
 		campanha.setDataPublicacao(Util.getDataAtualLoopback());
 		campanha.resetSetupCampanha();
 		campanha.resetAnuncioAplicativo();
+		campanha.resetAnuncioAplicacaoResultado();
 		campanha.save(new VoidCallback() {
 			@Override
 			public void onSuccess() {

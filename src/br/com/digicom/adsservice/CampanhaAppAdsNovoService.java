@@ -7,7 +7,6 @@ import com.google.ads.googleads.lib.GoogleAdsClient;
 import com.google.ads.googleads.v2.common.AdTextAsset;
 import com.google.ads.googleads.v2.common.AppAdInfo;
 import com.google.ads.googleads.v2.common.TargetCpa;
-import com.google.ads.googleads.v2.enums.AdGroupAdStatusEnum.AdGroupAdStatus;
 import com.google.ads.googleads.v2.enums.AdGroupStatusEnum.AdGroupStatus;
 import com.google.ads.googleads.v2.enums.AdvertisingChannelSubTypeEnum.AdvertisingChannelSubType;
 import com.google.ads.googleads.v2.enums.AdvertisingChannelTypeEnum.AdvertisingChannelType;
@@ -52,6 +51,8 @@ import com.google.protobuf.Int64Value;
 import com.google.protobuf.StringValue;
 
 import br.com.digicom.AdsService;
+import br.com.digicom.modelo.AnuncioAplicacaoResultado;
+import br.com.digicom.modelo.AnuncioAplicativo;
 import br.com.digicom.modelo.CampanhaAds;
 
 public class CampanhaAppAdsNovoService extends AdsService {
@@ -123,7 +124,11 @@ public class CampanhaAppAdsNovoService extends AdsService {
 	
 	private String getIdAds(MutateCampaignResult result) {
 		String[] palavras = result.getResourceName().split("/");
-		return palavras[3];
+		return palavras[palavras.length];
+	}
+	private String getIdAds(MutateAdGroupAdResult result) {
+		String[] palavras = result.getResourceName().split("/");
+		return palavras[palavras.length];
 	}
 	
 	private void montandoCriterios(GoogleAdsClient googleAdsClient, long customerId, String campaignResourceName) {
@@ -209,12 +214,15 @@ public class CampanhaAppAdsNovoService extends AdsService {
 	}
 
 	private void adicionaAnuncio(GoogleAdsClient googleAdsClient, long customerId, String adGroupResourceName) {
+		//AnuncioAplicativo anuncio = this.campanha.getAnuncioAplicativo();
+		AnuncioAplicacaoResultado rel = this.campanha.getAnuncioAplicacaoResultado();
+		AnuncioAplicativo anuncio = rel.getAnuncioAplicativo();
 		List<AdGroupAdOperation> operations = new ArrayList<>();
 		for (int i = 0; i < 1; i++) {
-			AdTextAsset titulo1 = AdTextAsset.newBuilder().setText(StringValue.of(this.campanha.getAnuncioAplicativo().getTitulo1())).build();
-			AdTextAsset titulo2 = AdTextAsset.newBuilder().setText(StringValue.of(this.campanha.getAnuncioAplicativo().getTitulo2())).build();
-			AdTextAsset titulo3 = AdTextAsset.newBuilder().setText(StringValue.of(this.campanha.getAnuncioAplicativo().getTitulo3())).build();
-			AdTextAsset titulo4 = AdTextAsset.newBuilder().setText(StringValue.of(this.campanha.getAnuncioAplicativo().getTitulo4())).build();
+			AdTextAsset titulo1 = AdTextAsset.newBuilder().setText(StringValue.of(anuncio.getTitulo1())).build();
+			AdTextAsset titulo2 = AdTextAsset.newBuilder().setText(StringValue.of(anuncio.getTitulo2())).build();
+			AdTextAsset titulo3 = AdTextAsset.newBuilder().setText(StringValue.of(anuncio.getTitulo3())).build();
+			AdTextAsset titulo4 = AdTextAsset.newBuilder().setText(StringValue.of(anuncio.getTitulo4())).build();
 
 			// Creates the expanded text ad info.
 			AppAdInfo appAd = AppAdInfo.newBuilder()
@@ -243,6 +251,8 @@ public class CampanhaAppAdsNovoService extends AdsService {
 					operations);
 			for (MutateAdGroupAdResult result : response.getResultsList()) {
 				System.out.printf("Adicionou anuncio: %s%n", result.getResourceName());
+				rel.setIdAds(this.getIdAds(result));
+				
 			}
 		}
 
