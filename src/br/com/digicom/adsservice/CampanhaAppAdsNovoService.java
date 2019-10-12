@@ -128,7 +128,8 @@ public class CampanhaAppAdsNovoService extends AdsService {
 	}
 	private String getIdAds(MutateAdGroupAdResult result) {
 		String[] palavras = result.getResourceName().split("/");
-		return palavras[palavras.length-1];
+		String campanhaGrupo = palavras[palavras.length-1];
+		return campanhaGrupo.split("~")[0];
 	}
 	
 	private void montandoCriterios(GoogleAdsClient googleAdsClient, long customerId, String campaignResourceName) {

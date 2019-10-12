@@ -150,7 +150,11 @@ public class CampanhaAnuncioResultado extends Model {
 	public void setCampanhaAdsId(Integer campanhaAdsId) {
 		this.campanhaAdsId = campanhaAdsId;
 	}
-
+	
+	
+	public void resetAnuncioAds() {
+		this.anuncioAds = null;
+	}
 	public AnuncioAds getAnuncioAds() {
 		return anuncioAds;
 	}

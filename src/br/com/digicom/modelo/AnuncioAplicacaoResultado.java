@@ -10,8 +10,32 @@ public class AnuncioAplicacaoResultado extends Model {
 	
 	private String idAds;
 	private AnuncioAplicativo anuncioAplicativo;
+	
+	private Integer anuncioAplicativoId;
+	private Integer campanhaAdsId;
 
 	
+	
+	
+	public Integer getAnuncioAplicativoId() {
+		return anuncioAplicativoId;
+	}
+
+	public void setAnuncioAplicativoId(Integer anuncioAplicativoId) {
+		this.anuncioAplicativoId = anuncioAplicativoId;
+	}
+
+	public Integer getCampanhaAdsId() {
+		return campanhaAdsId;
+	}
+
+	public void setCampanhaAdsId(Integer campanhaAdsId) {
+		this.campanhaAdsId = campanhaAdsId;
+	}
+
+	public void setId(Integer id) {
+		super.setIdObjeto(id);
+	}
 	
 	// ** ANUNCIO APLICATIVO **
 	public AnuncioAplicativo getAnuncioAplicativo() {

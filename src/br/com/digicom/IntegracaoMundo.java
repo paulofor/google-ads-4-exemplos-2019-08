@@ -90,6 +90,7 @@ public class IntegracaoMundo {
 		RepositorioBase.CampanhaAnuncioResultadoRepository rep = adapter
 				.createRepository(RepositorioBase.CampanhaAnuncioResultadoRepository.class);
 		for (CampanhaAnuncioResultado anuncio : campanha.getCampanhaAnuncioResultados()) {
+			anuncio.resetAnuncioAds();
 			System.out.println((pos++) + " - IDS Anuncio: " + anuncio.getIdAds());
 			if (anuncio.getIdAds() != null) {
 				anuncio.setRepository(rep);
@@ -116,6 +117,7 @@ public class IntegracaoMundo {
 		for (AnuncioAplicacaoResultado anuncio : campanha.getAnuncioAplicacaoResultados()) {
 			System.out.println((pos++) + " - IDS Anuncio: " + anuncio.getIdAds());
 			if (anuncio.getIdAds() != null) {
+				anuncio.resetAnuncioAplicativo();
 				anuncio.setRepository(rep);
 				anuncio.save(new VoidCallback() {
 					@Override

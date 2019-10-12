@@ -22,7 +22,7 @@ import br.com.digicom.modelo.PalavraChaveRaiz;
 public class RepositorioBase {
 	
 	
-	public class AnuncioAplicacaoResultadoRepository extends ModelRepository<AnuncioAplicacaoResultado>{
+	public static class AnuncioAplicacaoResultadoRepository extends ModelRepository<AnuncioAplicacaoResultado>{
 		public AnuncioAplicacaoResultadoRepository() {
 			super("AnuncioAplicacaoResultado", AnuncioAplicacaoResultado.class);
 		}

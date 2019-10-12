@@ -111,15 +111,15 @@ public class ObtemResultadoCampanhaTst {
 
 			// Pegar grupo
 			String query1 = " SELECT " + " ad_group.name, " + " ad_group.id, " + " metrics.impressions, " + " metrics.clicks "
-					+ " FROM ad_group " + " Where campaign.id = 6455404024";
+					+ " FROM ad_group " + " Where campaign.id = 6786373083";
 			// Anuncio de grupo -- 77477067535
 
 			// Pegar grupo --> totais do grupo.
 			String queryGrupo = " SELECT " + " ad_group.name, " + " ad_group.id, " + " metrics.impressions, " + " metrics.clicks "
-					+ " FROM ad_group " + " Where ad_group.id = 77477067535";
+					+ " FROM ad_group " + " Where ad_group.id = 85230998571";
 
 			String queryAd = " SELECT " + " metrics.impressions, metrics.clicks "
-					+ " FROM ad Where ad_group.id = 77477067535";
+					+ " FROM ad Where ad_group.id = 85230998571";
 			
 			
 			query = "SELECT ad_group.id, " + "ad_group_ad.ad.id, " + "ad_group_ad.ad.app_add_info.headline_part1, "
@@ -132,7 +132,7 @@ public class ObtemResultadoCampanhaTst {
 			//System.out.println(queryGrupo);
 
 			SearchGoogleAdsRequest request = SearchGoogleAdsRequest.newBuilder()
-					.setCustomerId(Long.toString(customerId)).setPageSize(PAGE_SIZE).setQuery(queryAd).build();
+					.setCustomerId(Long.toString(customerId)).setPageSize(PAGE_SIZE).setQuery(queryGrupo).build();
 
 			SearchPagedResponse searchPagedResponse = googleAdsServiceClient.search(request);
 

@@ -62,7 +62,7 @@ public class UtilAds {
 	}
 
 	private static String converteData(Calendar data) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		return sdf.format(data.getTime());
 	}
 
