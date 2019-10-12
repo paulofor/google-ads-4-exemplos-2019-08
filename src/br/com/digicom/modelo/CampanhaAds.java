@@ -11,6 +11,7 @@ public class CampanhaAds extends Model {
 
 	private List<CampanhaPalavraChaveResultado> campanhaPalavraChaveResultados;
 	private List<CampanhaAnuncioResultado> campanhaAnuncioResultados;
+	private List<AnuncioAplicacaoResultado> anuncioAplicacaoResultados; 
 
 	private String nome;
 	private String idAds;
@@ -95,19 +96,7 @@ public class CampanhaAds extends Model {
 		this.taxaConversao = taxaConversao;
 	}
 
-	// ** ANUNCIO APLICATIVO RESULTADO**
-	public AnuncioAplicacaoResultado getAnuncioAplicacaoResultado() {
-		return anuncioAplicacaoResultado;
-	}
-
-	public void setAnuncioAplicacaoResultados(Object anuncioAplicacaoResultado) {
-		this.anuncioAplicacaoResultado = new AnuncioAplicacaoResultado();
-		BeanUtil.setProperties(this.anuncioAplicacaoResultado, (Map<String, ? extends Object>) anuncioAplicacaoResultado, true);
-	}
-
-	public void resetAnuncioAplicacaoResultado() {
-		this.anuncioAplicacaoResultado = null;
-	}
+	
 
 	// ** ANUNCIO APLICATIVO **
 	public AnuncioAplicativo getAnuncioAplicativo() {
@@ -165,6 +154,20 @@ public class CampanhaAds extends Model {
 
 	}
 
+	
+	public List<AnuncioAplicacaoResultado> getAnuncioAplicacaoResultados() {
+		return anuncioAplicacaoResultados;
+	}
+
+	public void setAnuncioAplicacaoResultados(List<AnuncioAplicacaoResultado> anuncioAplicacaoResultados) {
+		this.anuncioAplicacaoResultados = new ArrayList<AnuncioAplicacaoResultado>();
+		for (int i = 0; i < anuncioAplicacaoResultados.size(); i++) {
+			Object objeto = new AnuncioAplicacaoResultado();
+			BeanUtil.setProperties(objeto, (Map<String, ? extends Object>) anuncioAplicacaoResultados.get(i), true);
+			this.anuncioAplicacaoResultados.add((AnuncioAplicacaoResultado) objeto);
+		}
+
+	}
 	public String getUrlAlvo() {
 		return urlAlvo;
 	}

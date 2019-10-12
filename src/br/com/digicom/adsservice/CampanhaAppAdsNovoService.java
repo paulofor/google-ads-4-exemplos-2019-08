@@ -124,11 +124,11 @@ public class CampanhaAppAdsNovoService extends AdsService {
 	
 	private String getIdAds(MutateCampaignResult result) {
 		String[] palavras = result.getResourceName().split("/");
-		return palavras[palavras.length];
+		return palavras[palavras.length-1];
 	}
 	private String getIdAds(MutateAdGroupAdResult result) {
 		String[] palavras = result.getResourceName().split("/");
-		return palavras[palavras.length];
+		return palavras[palavras.length-1];
 	}
 	
 	private void montandoCriterios(GoogleAdsClient googleAdsClient, long customerId, String campaignResourceName) {
@@ -215,7 +215,7 @@ public class CampanhaAppAdsNovoService extends AdsService {
 
 	private void adicionaAnuncio(GoogleAdsClient googleAdsClient, long customerId, String adGroupResourceName) {
 		//AnuncioAplicativo anuncio = this.campanha.getAnuncioAplicativo();
-		AnuncioAplicacaoResultado rel = this.campanha.getAnuncioAplicacaoResultado();
+		AnuncioAplicacaoResultado rel = this.campanha.getAnuncioAplicacaoResultados().get(0);
 		AnuncioAplicativo anuncio = rel.getAnuncioAplicativo();
 		List<AdGroupAdOperation> operations = new ArrayList<>();
 		for (int i = 0; i < 1; i++) {

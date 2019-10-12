@@ -2,9 +2,10 @@ package br.com.digicom.modelo;
 
 import java.util.Map;
 
+import com.strongloop.android.loopback.Model;
 import com.strongloop.android.remoting.BeanUtil;
 
-public class AnuncioAplicacaoResultado {
+public class AnuncioAplicacaoResultado extends Model {
 	
 	
 	private String idAds;

@@ -5,12 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.com.digicom.modelo.CampanhaAds;
-import br.com.digicom.modelo.CampanhaAnuncioResultado;
-import br.com.digicom.modelo.CampanhaPalavraChaveResultado;
-import br.com.digicom.modelo.PalavraChaveEstatistica;
-import br.com.digicom.modelo.PalavraChaveRaiz;
-
 import com.strongloop.android.loopback.ModelRepository;
 import com.strongloop.android.loopback.callbacks.EmptyResponseParser;
 import com.strongloop.android.loopback.callbacks.JsonArrayParser;
@@ -18,9 +12,27 @@ import com.strongloop.android.loopback.callbacks.ListCallback;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
 import com.strongloop.android.remoting.adapters.RestContractItem;
 
+import br.com.digicom.modelo.AnuncioAplicacaoResultado;
+import br.com.digicom.modelo.CampanhaAds;
+import br.com.digicom.modelo.CampanhaAnuncioResultado;
+import br.com.digicom.modelo.CampanhaPalavraChaveResultado;
+import br.com.digicom.modelo.PalavraChaveEstatistica;
+import br.com.digicom.modelo.PalavraChaveRaiz;
+
 public class RepositorioBase {
 	
 	
+	public class AnuncioAplicacaoResultadoRepository extends ModelRepository<AnuncioAplicacaoResultado>{
+		public AnuncioAplicacaoResultadoRepository() {
+			super("AnuncioAplicacaoResultado", AnuncioAplicacaoResultado.class);
+		}
+	
+		@Override
+		protected String verificaNomeUrl(String nome) {
+			return "AnuncioAplicacaoResultados";
+		}
+	}
+
 	public static class PalavraChaveRaizRepository extends ModelRepository<PalavraChaveRaiz> {
 		public PalavraChaveRaizRepository() {
 			super("PalavraChaveRaiz", PalavraChaveRaiz.class);

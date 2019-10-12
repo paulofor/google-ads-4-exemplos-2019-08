@@ -5,8 +5,8 @@ import java.util.List;
 import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
 
-
 import br.com.digicom.adsservice.CampanhaAppAdsNovoService;
+import br.com.digicom.modelo.AnuncioAplicacaoResultado;
 import br.com.digicom.modelo.CampanhaAds;
 import br.com.digicom.modelo.CampanhaAnuncioResultado;
 import br.com.digicom.modelo.CampanhaPalavraChaveResultado;
@@ -44,7 +44,7 @@ public class IntegracaoMundo {
 		campanha.setDataPublicacao(Util.getDataAtualLoopback());
 		campanha.resetSetupCampanha();
 		campanha.resetAnuncioAplicativo();
-		campanha.resetAnuncioAplicacaoResultado();
+		//campanha.resetAnuncioAplicacaoResultado();
 		campanha.save(new VoidCallback() {
 			@Override
 			public void onSuccess() {
@@ -57,6 +57,7 @@ public class IntegracaoMundo {
 				t.printStackTrace();
 			}
 		});
+		salvaAnuncioAplicativo(campanha);
 	}
 
 	public void criaCampanhaGeral(CampanhaAds campanha) {
@@ -89,6 +90,30 @@ public class IntegracaoMundo {
 		RepositorioBase.CampanhaAnuncioResultadoRepository rep = adapter
 				.createRepository(RepositorioBase.CampanhaAnuncioResultadoRepository.class);
 		for (CampanhaAnuncioResultado anuncio : campanha.getCampanhaAnuncioResultados()) {
+			System.out.println((pos++) + " - IDS Anuncio: " + anuncio.getIdAds());
+			if (anuncio.getIdAds() != null) {
+				anuncio.setRepository(rep);
+				anuncio.save(new VoidCallback() {
+					@Override
+					public void onSuccess() {
+						System.out.print("sucesso - alteracao ressultado");
+					}
+
+					@Override
+					public void onError(Throwable t) {
+						// TODO Auto-generated method stub
+						t.printStackTrace();
+					}
+				});
+			}
+		}
+	}
+	
+	private void salvaAnuncioAplicativo(CampanhaAds campanha) {
+		int pos = 0;
+		RepositorioBase.AnuncioAplicacaoResultadoRepository rep = adapter
+				.createRepository(RepositorioBase.AnuncioAplicacaoResultadoRepository.class);
+		for (AnuncioAplicacaoResultado anuncio : campanha.getAnuncioAplicacaoResultados()) {
 			System.out.println((pos++) + " - IDS Anuncio: " + anuncio.getIdAds());
 			if (anuncio.getIdAds() != null) {
 				anuncio.setRepository(rep);
