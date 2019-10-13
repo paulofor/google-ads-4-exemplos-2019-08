@@ -180,6 +180,7 @@ public class IntegracaoMundo {
 	*/
 
 	public void atualizaAnuncio(CampanhaAnuncioResultado item) {
+		
 		item.save(new VoidCallback() {
 			@Override
 			public void onSuccess() {
@@ -214,23 +215,39 @@ public class IntegracaoMundo {
 	}
 
 	public void atualizaCampanha(final CampanhaAds item) {
-		
 		item.save(new VoidCallback() {
 			@Override
 			public void onSuccess() {
-				// TODO Auto-generated method stub
-				System.out.print("sucesso" + item.getId());
+				System.out.println("Sucesso Campanha: " + item.getId());
 			}
 
 			@Override
 			public void onError(Throwable t) {
-				// TODO Auto-generated method stub
 				t.printStackTrace();
 			}
 
 		});
-
-		
+		atualizaGrupoAnuncioCampanha(item);
 	}
 
+	public void atualizaGrupoAnuncioCampanha(final CampanhaAds item) {
+		//RepositorioBase.AnuncioAplicacaoResultadoRepository rep = adapter
+		//		.createRepository(RepositorioBase.AnuncioAplicacaoResultadoRepository.class);
+		for (AnuncioAplicacaoResultado grupo : item.getAnuncioAplicacaoResultados()) {
+			//grupo.setRepository(rep);
+			grupo.resetAnuncioAplicativo();
+			grupo.save(new VoidCallback() {
+				@Override
+				public void onSuccess() {
+					System.out.println("Sucesso GrupoAnuncio " + item.getId());
+				}
+
+				@Override
+				public void onError(Throwable t) {
+					t.printStackTrace();
+				}
+
+			});
+		}
+	}
 }

@@ -19,7 +19,7 @@ public class CriaCampanhas {
 		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
 		RepositorioBase.CampanhaAdRepository rep = adapter.createRepository(RepositorioBase.CampanhaAdRepository.class);
 		
-		rep.listaPendente(80,new ListCallback<CampanhaAds>() { 
+		rep.listaPendente(new ListCallback<CampanhaAds>() { 
             
 			@Override
 			public void onError(Throwable t) {

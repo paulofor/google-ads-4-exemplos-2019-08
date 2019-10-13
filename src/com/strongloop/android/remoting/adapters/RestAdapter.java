@@ -177,6 +177,12 @@ public class RestAdapter extends Adapter {
         String path = contract.getUrlForMethod(method, combinedParameters);
         ParameterEncoding parameterEncoding = contract.getParameterEncodingForMethod(method);
 
+        System.out.println();
+        System.out.println("Path: " + path);
+        System.out.println("Verb: " + verb);
+        System.out.println("CombinedParameters: " + combinedParameters);
+        System.out.println();
+        
         request(path, verb, combinedParameters, parameterEncoding, httpHandler);
     }
 

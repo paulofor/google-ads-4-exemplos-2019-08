@@ -33,6 +33,23 @@ public class RepositorioBase {
 		}
 	}
 
+	/*
+	 * 
+	 * Evolucao que ainda nao fiz pq ta funcionando bem assim
+	 * 
+	 * 
+	public static class AnuncioAplicativoRepository extends ModelRepository<AnuncioAplicativo>{
+		public AnuncioAplicativoRepository() {
+			super("AnuncioAplicativo", AnuncioAplicativo.class);
+		}
+	
+		@Override
+		protected String verificaNomeUrl(String nome) {
+			return "AnuncioAplicacaoResultados";
+		}
+	}
+	*/
+	
 	public static class PalavraChaveRaizRepository extends ModelRepository<PalavraChaveRaiz> {
 		public PalavraChaveRaizRepository() {
 			super("PalavraChaveRaiz", PalavraChaveRaiz.class);

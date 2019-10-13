@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.strongloop.android.loopback.Model;
+import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.remoting.BeanUtil;
 
-public class CampanhaAds extends Model {
+import br.com.digicom.modelo.repositorio.RepositorioBase;
 
+public class CampanhaAds extends ModeloBase {
+
+	
 	private List<CampanhaPalavraChaveResultado> campanhaPalavraChaveResultados;
 	private List<CampanhaAnuncioResultado> campanhaAnuncioResultados;
 	private List<AnuncioAplicacaoResultado> anuncioAplicacaoResultados; 
@@ -146,10 +150,15 @@ public class CampanhaAds extends Model {
 
 	public void setCampanhaAnuncioResultados(List<CampanhaAnuncioResultado> campanhaAnuncioResultados) {
 		this.campanhaAnuncioResultados = new ArrayList<CampanhaAnuncioResultado>();
+		/*
 		for (int i = 0; i < campanhaAnuncioResultados.size(); i++) {
 			Object objeto = new CampanhaAnuncioResultado();
 			BeanUtil.setProperties(objeto, (Map<String, ? extends Object>) campanhaAnuncioResultados.get(i), true);
 			this.campanhaAnuncioResultados.add((CampanhaAnuncioResultado) objeto);
+		}
+		*/
+		for (Object item : campanhaAnuncioResultados) {
+			this.campanhaAnuncioResultados.add(this.criaCampanhaAnuncioResultado(item));
 		}
 
 	}
@@ -160,11 +169,12 @@ public class CampanhaAds extends Model {
 	}
 
 	public void setAnuncioAplicacaoResultados(List<AnuncioAplicacaoResultado> anuncioAplicacaoResultados) {
+		RepositorioBase.AnuncioAplicacaoResultadoRepository rep = adapter
+				.createRepository(RepositorioBase.AnuncioAplicacaoResultadoRepository.class);
 		this.anuncioAplicacaoResultados = new ArrayList<AnuncioAplicacaoResultado>();
 		for (int i = 0; i < anuncioAplicacaoResultados.size(); i++) {
-			Object objeto = new AnuncioAplicacaoResultado();
-			BeanUtil.setProperties(objeto, (Map<String, ? extends Object>) anuncioAplicacaoResultados.get(i), true);
-			this.anuncioAplicacaoResultados.add((AnuncioAplicacaoResultado) objeto);
+			AnuncioAplicacaoResultado objeto2 = criaAnuncioAplicacaoResultado(anuncioAplicacaoResultados.get(i));
+			this.anuncioAplicacaoResultados.add(objeto2);
 		}
 
 	}

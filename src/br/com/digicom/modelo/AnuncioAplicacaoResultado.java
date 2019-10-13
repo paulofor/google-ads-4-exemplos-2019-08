@@ -13,10 +13,83 @@ public class AnuncioAplicacaoResultado extends Model {
 	
 	private Integer anuncioAplicativoId;
 	private Integer campanhaAdsId;
+	
+	private Double orcamentoTotalExecutado;
+	private Integer quantidadeImpressao;
+	private Integer quantidadeClique;
+	private Double ctr;
+	private Double cpcMedio;
+	private Double conversao;
+	private Double taxaConversao;
+	private Double custoConversao;
+	
+
+	
+	public Double getCustoConversao() {
+		return custoConversao;
+	}
+
+	public void setOrcamentoTotalExecutado(Double custo) {
+		this.orcamentoTotalExecutado = custo;
+	}
+
+	public void setQuantidadeImpressao(Integer impressao) {
+		this.quantidadeImpressao = impressao;
+	}
+
+	public void setQuantidadeClique(Integer click) {
+		this.quantidadeClique = click;
+	}
+
+	public void setCtr(Double ctr) {
+		this.ctr = ctr;
+	}
+
+	public void setCpcMedio(Double averageCpc) {
+		this.cpcMedio = averageCpc;
+	}
+
+	public void setConversao(Double converions) {
+		this.conversao = converions;
+	}
+
+	public void setTaxaConversao(Double conversionRate) {
+		taxaConversao = conversionRate;
+	}
 
 	
 	
 	
+	
+	
+	public Double getOrcamentoTotalExecutado() {
+		return orcamentoTotalExecutado;
+	}
+
+	public Integer getQuantidadeImpressao() {
+		return quantidadeImpressao;
+	}
+
+	public Integer getQuantidadeClique() {
+		return quantidadeClique;
+	}
+
+	public Double getCtr() {
+		return ctr;
+	}
+
+	public Double getCpcMedio() {
+		return cpcMedio;
+	}
+
+	public Double getConversao() {
+		return conversao;
+	}
+
+	public Double getTaxaConversao() {
+		return taxaConversao;
+	}
+
 	public Integer getAnuncioAplicativoId() {
 		return anuncioAplicativoId;
 	}
@@ -33,9 +106,9 @@ public class AnuncioAplicacaoResultado extends Model {
 		this.campanhaAdsId = campanhaAdsId;
 	}
 
-	public void setId(Integer id) {
-		super.setIdObjeto(id);
-	}
+	//public void setId(Integer id) {
+	//	super.setIdObjeto(id);
+	//}
 	
 	// ** ANUNCIO APLICATIVO **
 	public AnuncioAplicativo getAnuncioAplicativo() {
@@ -57,6 +130,12 @@ public class AnuncioAplicacaoResultado extends Model {
 
 	public void setIdAds(String idAds) {
 		this.idAds = idAds;
+	}
+
+	
+
+	public void setCustoConversao(Double costPerConversion) {
+		this.custoConversao = costPerConversion;
 	}
 
 }
