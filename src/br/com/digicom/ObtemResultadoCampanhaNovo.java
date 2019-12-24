@@ -12,7 +12,7 @@ import br.com.digicom.modelo.util.Util;
 
 public class ObtemResultadoCampanhaNovo {
 
-	private static RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+	private static RestAdapter adapter = new RestAdapter("http://www.digicom.inf.br:21101/api");
 
 	public static void main(String[] args) {
 		processa();

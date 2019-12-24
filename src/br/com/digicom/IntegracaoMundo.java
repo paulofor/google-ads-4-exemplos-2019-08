@@ -15,7 +15,7 @@ import br.com.digicom.modelo.util.Util;
 
 public class IntegracaoMundo {
 
-	RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+	RestAdapter adapter = new RestAdapter("http://www.digicom.inf.br:21101/api");
 
 	public void criaCampanhaSemSalvar(CampanhaAds campanha) {
 		CampanhaAppAdsNovoService servico = new CampanhaAppAdsNovoService();
