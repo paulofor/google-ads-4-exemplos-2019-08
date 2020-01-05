@@ -17,7 +17,7 @@ public class ObtemCampanhaParaPublicarTst {
 
 	public static void main(String[] args) {
 		System.out.println("Ola Mundo");
-		RestAdapter adapter = new RestAdapter("http://www.digicom.inf.br:21101/api");
+		RestAdapter adapter = new RestAdapter("https://www.digicom.inf.br:21101/api");
 		RepositorioBase.CampanhaAdRepository rep = adapter.createRepository(RepositorioBase.CampanhaAdRepository.class);
 		
 		rep.listaPendente(78, new ListCallback<CampanhaAds>() { 

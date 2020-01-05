@@ -15,7 +15,7 @@ import br.com.digicom.modelo.util.Util;
 
 public class IntegracaoMundo {
 
-	RestAdapter adapter = new RestAdapter("http://www.digicom.inf.br:21101/api");
+	RestAdapter adapter = new RestAdapter("https://www.digicom.inf.br:21101/api");
 
 	public void criaCampanhaSemSalvar(CampanhaAds campanha) {
 		CampanhaAppAdsNovoService servico = new CampanhaAppAdsNovoService();
@@ -24,6 +24,7 @@ public class IntegracaoMundo {
 	}
 
 	public void criaCampanhaLista(List<CampanhaAds> objects) {
+		
 		for (CampanhaAds campanha : objects) {
 			if (campanha.getAnuncioAplicativo() != null) {
 				criaCampanhaAplicacao(campanha);
