@@ -33,13 +33,12 @@ public class CriaCampanhas {
 				
 			} 
         });
-        try {
-			Thread.sleep(5 * 60 * 1000);
-			System.exit(0);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        //try {
+		//	Thread.sleep(5 * 60 * 1000);
+		//	System.exit(0);
+		//} catch (InterruptedException e) {
+		//	e.printStackTrace();
+		//}
         
 		
 	}
