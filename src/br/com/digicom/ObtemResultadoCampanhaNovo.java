@@ -12,7 +12,7 @@ import br.com.digicom.modelo.util.Util;
 
 public class ObtemResultadoCampanhaNovo {
 
-	private static RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+	private static RestAdapter adapter = new RestAdapter("https://www.digicom.inf.br:21101/api");
 
 	public static void main(String[] args) {
 		processa();
@@ -31,12 +31,19 @@ public class ObtemResultadoCampanhaNovo {
 			public void onSuccess(List<CampanhaAds> objects) {
 				System.out.println("Lista pra resultado contendo " + objects.size() + " campanhas.");
 				for (CampanhaAds item : objects) {
-					//processaAnuncios(item);
+					// processaAnuncios(item);
 					processaCampanha(item);
-					//processaPalavraChave(item);
+					// processaPalavraChave(item);
 				}
 			}
 		});
+		try {
+			Thread.sleep(5 * 60 * 1000);
+			System.exit(0);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private static void processaCampanha(CampanhaAds campanha) {
@@ -51,64 +58,51 @@ public class ObtemResultadoCampanhaNovo {
 	}
 
 	/*
-	private static void processaAnuncios(CampanhaAds campanha) {
-		RepositorioBase.CampanhaAnuncioResultadoRepository rep = adapter
-				.createRepository(RepositorioBase.CampanhaAnuncioResultadoRepository.class);
-		rep.listaParaResultadoPorIdCampanha((Integer) campanha.getId(), new ListCallback<CampanhaAnuncioResultado>() {
-			@Override
-			public void onError(Throwable t) {
-				t.printStackTrace();
-			}
-
-			@Override
-			public void onSuccess(List<CampanhaAnuncioResultado> objects) {
-				System.out.println("Lista pra resultado contendo " + objects.size() + " anuncios.");
-				for (CampanhaAnuncioResultado item : objects) {
-					processaAnuncio(item);
-				}
-			}
-
-		});
-	}
-
-	private static void processaPalavraChave(final CampanhaAds campanha) {
-		RepositorioBase.CampanhaPalavraChaveResultadoRepository rep = adapter
-				.createRepository(RepositorioBase.CampanhaPalavraChaveResultadoRepository.class);
-		rep.listaParaResultadoPorIdCampanha((Integer) campanha.getId(),
-				new ListCallback<CampanhaPalavraChaveResultado>() {
-					@Override
-					public void onError(Throwable t) {
-						t.printStackTrace();
-					}
-
-					@Override
-					public void onSuccess(List<CampanhaPalavraChaveResultado> objects) {
-						System.out.println("Lista pra resultado contendo " + objects.size() + " palavras chaves.");
-						for (CampanhaPalavraChaveResultado item : objects) {
-							processaPalavraChave(item, campanha);
-						}
-					}
-
-				});
-	}
-
-	private static void processaAnuncio(CampanhaAnuncioResultado item) {
-		System.out.println("Atualizar anuncio " + item.getIdAds());
-		AnuncioResultService srv = new AnuncioResultService();
-		srv.atualizaResultado(item);
-
-		IntegracaoMundo facade = new IntegracaoMundo();
-		facade.atualizaAnuncio(item);
-	}
-
-	private static void processaPalavraChave(CampanhaPalavraChaveResultado item, CampanhaAds campanha) {
-		System.out.println("Atualizar palavra-chave " + item.getIdAds());
-		PalavraChaveResultService srv = new PalavraChaveResultService();
-		srv.atualizaResultado(item, campanha);
-
-		IntegracaoMundo facade = new IntegracaoMundo();
-		facade.atualizaPalavraChave(item);
-	}
-	*/
+	 * private static void processaAnuncios(CampanhaAds campanha) {
+	 * RepositorioBase.CampanhaAnuncioResultadoRepository rep = adapter
+	 * .createRepository(RepositorioBase.CampanhaAnuncioResultadoRepository.class);
+	 * rep.listaParaResultadoPorIdCampanha((Integer) campanha.getId(), new
+	 * ListCallback<CampanhaAnuncioResultado>() {
+	 * 
+	 * @Override public void onError(Throwable t) { t.printStackTrace(); }
+	 * 
+	 * @Override public void onSuccess(List<CampanhaAnuncioResultado> objects) {
+	 * System.out.println("Lista pra resultado contendo " + objects.size() +
+	 * " anuncios."); for (CampanhaAnuncioResultado item : objects) {
+	 * processaAnuncio(item); } }
+	 * 
+	 * }); }
+	 * 
+	 * private static void processaPalavraChave(final CampanhaAds campanha) {
+	 * RepositorioBase.CampanhaPalavraChaveResultadoRepository rep = adapter
+	 * .createRepository(RepositorioBase.CampanhaPalavraChaveResultadoRepository.
+	 * class); rep.listaParaResultadoPorIdCampanha((Integer) campanha.getId(), new
+	 * ListCallback<CampanhaPalavraChaveResultado>() {
+	 * 
+	 * @Override public void onError(Throwable t) { t.printStackTrace(); }
+	 * 
+	 * @Override public void onSuccess(List<CampanhaPalavraChaveResultado> objects)
+	 * { System.out.println("Lista pra resultado contendo " + objects.size() +
+	 * " palavras chaves."); for (CampanhaPalavraChaveResultado item : objects) {
+	 * processaPalavraChave(item, campanha); } }
+	 * 
+	 * }); }
+	 * 
+	 * private static void processaAnuncio(CampanhaAnuncioResultado item) {
+	 * System.out.println("Atualizar anuncio " + item.getIdAds());
+	 * AnuncioResultService srv = new AnuncioResultService();
+	 * srv.atualizaResultado(item);
+	 * 
+	 * IntegracaoMundo facade = new IntegracaoMundo(); facade.atualizaAnuncio(item);
+	 * }
+	 * 
+	 * private static void processaPalavraChave(CampanhaPalavraChaveResultado item,
+	 * CampanhaAds campanha) { System.out.println("Atualizar palavra-chave " +
+	 * item.getIdAds()); PalavraChaveResultService srv = new
+	 * PalavraChaveResultService(); srv.atualizaResultado(item, campanha);
+	 * 
+	 * IntegracaoMundo facade = new IntegracaoMundo();
+	 * facade.atualizaPalavraChave(item); }
+	 */
 
 }

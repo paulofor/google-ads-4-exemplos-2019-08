@@ -9,7 +9,7 @@ import br.com.digicom.modelo.repositorio.RepositorioBase;
 
 public abstract class ModeloBase extends Model{
 
-	protected RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+	protected RestAdapter adapter = new RestAdapter("https://www.digicom.inf.br:21101/api");
 	
 	protected AnuncioAplicacaoResultado criaAnuncioAplicacaoResultado(Object item) {
 		RepositorioBase.AnuncioAplicacaoResultadoRepository rep = adapter

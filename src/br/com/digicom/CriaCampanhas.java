@@ -16,7 +16,7 @@ public class CriaCampanhas {
 
 	public static void main(String[] args) {
 		System.out.println("Ola Mundo");
-		RestAdapter adapter = new RestAdapter("http://validacao.kinghost.net:21101/api");
+		RestAdapter adapter = new RestAdapter("https://www.digicom.inf.br:21101/api");
 		RepositorioBase.CampanhaAdRepository rep = adapter.createRepository(RepositorioBase.CampanhaAdRepository.class);
 		
 		rep.listaPendente(new ListCallback<CampanhaAds>() { 
@@ -33,7 +33,13 @@ public class CriaCampanhas {
 				
 			} 
         });
-                
+        //try {
+		//	Thread.sleep(5 * 60 * 1000);
+		//	System.exit(0);
+		//} catch (InterruptedException e) {
+		//	e.printStackTrace();
+		//}
+        
 		
 	}
 

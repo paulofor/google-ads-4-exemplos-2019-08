@@ -3,6 +3,23 @@
 package com.strongloop.android.remoting.adapters;
 
 import com.ning.http.client.*;
+
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.Map;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+
+
+import com.ning.http.client.AsyncCompletionHandler;
+import com.ning.http.client.AsyncHttpClientConfig;
+import com.ning.http.client.Response;
+
 import com.ning.http.client.multipart.FilePart;
 import com.strongloop.android.remoting.JsonUtil;
 import com.strongloop.android.util.Log;
@@ -69,10 +86,7 @@ public class RestAdapter extends Adapter {
         if (url == null) {
             client = null;
         } else {
-            client = new HttpClient(url);
-
-            // TODO: Find way to set these headers globally
-            //client.addHeader("Accept", "application/json");
+        	client = new HttpClient(url,obtemConfig());
         }
     }
 
@@ -304,7 +318,8 @@ public class RestAdapter extends Adapter {
 
         private String baseUrl;
 
-        public HttpClient(String baseUrl) {
+    	public HttpClient(String baseUrl, AsyncHttpClientConfig config) {
+    		super(config);
             if (baseUrl == null) {
                 throw new IllegalArgumentException(
                         "The baseUrl cannot be null");
@@ -525,5 +540,43 @@ public class RestAdapter extends Adapter {
         public void removeHeader(String key) {
             headers.remove(key);
         }
+    }
+    
+    
+    private SSLContext createSslContext() throws NoSuchAlgorithmException, KeyManagementException  {
+        X509TrustManager tm = new X509TrustManager() {
+
+            public void checkClientTrusted(X509Certificate[] xcs,
+                                       String string) throws CertificateException {
+            }
+
+            public void checkServerTrusted(X509Certificate[] xcs,
+                                       String string) throws CertificateException {
+            }
+
+            public X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+        };
+
+        SSLContext ctx = SSLContext.getInstance("TLS");
+        ctx.init(null, new TrustManager[] { tm }, null);
+        return ctx;
+    }
+    
+    private AsyncHttpClientConfig obtemConfig()  {
+    	AsyncHttpClientConfig config = null;
+    	try {
+			config = new AsyncHttpClientConfig.Builder()
+			.setSSLContext(createSslContext())
+			.build();
+		} catch (KeyManagementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return config;
     }
 }
