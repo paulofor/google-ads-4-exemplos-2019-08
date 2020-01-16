@@ -46,7 +46,7 @@ public class ObtemResultadoCampanhaTst {
 	}
 
 	public static void main(String[] args) throws IOException {
-		//setProxy();
+		setProxy();
 		GetCampaignsWithStatsParams params = new GetCampaignsWithStatsParams();
 		if (!params.parseArguments(args)) {
 			params.customerId = Long.parseLong("5328916093");
@@ -147,12 +147,12 @@ public class ObtemResultadoCampanhaTst {
 		System.setProperty("https.proxyHost", "10.21.7.10");
 		System.setProperty("https.proxyPort", "82");
 		System.setProperty("https.proxyUser", "tr626987");
-		System.setProperty("https.proxyPassword", "Lafiti23");
+		System.setProperty("https.proxyPassword", "LojaDig1");
 
 		System.setProperty("http.proxyHost", "10.21.7.10");
 		System.setProperty("http.proxyPort", "82");
 		System.setProperty("http.proxyUser", "tr626987");
-		System.setProperty("http.proxyPassword", "Lafiti23");
+		System.setProperty("http.proxyPassword", "LojaDig1");
 
 		Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("10.21.7.10", 82));
 		HttpTransport httpTransport = new NetHttpTransport.Builder().setProxy(proxy).build();
