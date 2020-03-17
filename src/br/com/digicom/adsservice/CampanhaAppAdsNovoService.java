@@ -89,7 +89,7 @@ public class CampanhaAppAdsNovoService extends AdsService {
 				.build();
 		UtilAds.setCampanha(campanha);
 		Campaign campaign = Campaign.newBuilder()
-				.setName(StringValue.of(this.campanha.getNome() + "_" + System.currentTimeMillis()))
+				.setName(StringValue.of("z" + System.currentTimeMillis() + "_" + this.campanha.getNome()))
 				.setStatus(CampaignStatus.PAUSED)
 				.setAdvertisingChannelType(AdvertisingChannelType.MULTI_CHANNEL)
 				.setAdvertisingChannelSubType(AdvertisingChannelSubType.APP_CAMPAIGN)

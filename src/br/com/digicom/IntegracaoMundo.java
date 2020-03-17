@@ -16,6 +16,10 @@ import br.com.digicom.modelo.util.Util;
 public class IntegracaoMundo {
 
 	RestAdapter adapter = new RestAdapter("https://www.digicom.inf.br:21101/api");
+	
+	RepositorioBase.CampanhaAdRepository repCampanha = adapter
+			.createRepository(RepositorioBase.CampanhaAdRepository.class);
+
 
 	public void criaCampanhaSemSalvar(CampanhaAds campanha) {
 		CampanhaAppAdsNovoService servico = new CampanhaAppAdsNovoService();
@@ -38,7 +42,7 @@ public class IntegracaoMundo {
 		
 	}
 	
-	public void criaCampanhaAplicacao(CampanhaAds campanha) {
+	public void criaCampanhaAplicacao(final CampanhaAds campanha) {
 		CampanhaAppAdsNovoService servico = new CampanhaAppAdsNovoService();
 		servico.cria(campanha);
 		System.out.println("IdAds: " + campanha.getIdAds());
@@ -50,6 +54,17 @@ public class IntegracaoMundo {
 			@Override
 			public void onSuccess() {
 				System.out.print("sucesso - alteracao campanha aplicacao");
+				repCampanha.criaValorEtapaFunil((int)campanha.getId(), new VoidCallback() {
+					@Override
+					public void onSuccess() {
+						System.out.println("criou valor etapa funil");
+					}
+					@Override
+					public void onError(Throwable t) {
+						t.printStackTrace();
+					}
+					
+				});
 			}
 
 			@Override

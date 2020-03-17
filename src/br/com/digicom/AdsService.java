@@ -75,10 +75,10 @@ public abstract class AdsService {
 		try {
 			googleAdsClient = GoogleAdsClient.newBuilder().fromPropertiesFile().build();
 		} catch (FileNotFoundException fnfe) {
-			System.err.printf("Failed to load GoogleAdsClient configuration from file. Exception: %s%n", fnfe);
+			System.out.printf("Failed to load GoogleAdsClient configuration from file. Exception: %s%n", fnfe);
 			return;
 		} catch (IOException ioe) {
-			System.err.printf("Failed to create GoogleAdsClient. Exception: %s%n", ioe);
+			System.out.printf("Failed to create GoogleAdsClient. Exception: %s%n", ioe);
 			return;
 		}
 
@@ -95,7 +95,7 @@ public abstract class AdsService {
 					gae.getRequestId());
 			int i = 0;
 			for (GoogleAdsError googleAdsError : gae.getGoogleAdsFailure().getErrorsList()) {
-				System.err.printf("  Error %d: %s%n", i++, googleAdsError);
+				System.out.printf("  Error %d: %s%n", i++, googleAdsError);
 			}
 		}
 

@@ -137,6 +137,13 @@ public class RepositorioBase {
 	        params.put("idCampanha", id);
 	        invokeStaticMethod("calculaResultados", params, new EmptyResponseParser(callback));
 	    }
+		public void criaValorEtapaFunil(int id, final VoidCallback callback) {
+			RestContractItem contrato = new RestContractItem("CampanhaAds/criaValorEtapaFunil","POST");
+			this.getRestAdapter().getContract().addItem(contrato, "CampanhaAd.criaValorEtapaFunil");
+	        Map<String, Object> params = new HashMap<String, Object>();
+	        params.put("idCampanha", id);
+	        invokeStaticMethod("criaValorEtapaFunil", params, new EmptyResponseParser(callback));
+	    }
 	}
 	
 	
