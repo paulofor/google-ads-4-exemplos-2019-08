@@ -139,6 +139,8 @@ public class CampanhaAppAdsNovoService extends AdsService {
 		List<CampaignCriterionOperation> operations = ImmutableList.of(
 				CampaignCriterionOperation.newBuilder().setCreate(buildLanguageIdCriterion(1014, campaignResourceName))
 						.build(),
+				CampaignCriterionOperation.newBuilder().setCreate(buildLanguageIdCriterion(1000, campaignResourceName))
+						.build(),
 				CampaignCriterionOperation.newBuilder().setCreate(buildLocationIdCriterion(2076, campaignResourceName))
 						.build());
 

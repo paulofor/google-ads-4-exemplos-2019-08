@@ -16,9 +16,17 @@ public class AnuncioAds extends Model {
 	private Double custo;
 	private Integer impressao;
 	private Integer click;
+	
+	private String idAds;
 
 	
-	
+	public String getIdAds() {
+		return idAds;
+	}
+
+	public void setIdAds(String idAds) {
+		this.idAds = idAds;
+	}
 	
 	public String getTitulo1() {
 		return titulo1;

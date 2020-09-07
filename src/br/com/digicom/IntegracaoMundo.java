@@ -6,6 +6,7 @@ import com.strongloop.android.loopback.RestAdapter;
 import com.strongloop.android.loopback.callbacks.VoidCallback;
 
 import br.com.digicom.adsservice.CampanhaAppAdsNovoService;
+import br.com.digicom.adsservice.CampanhaGeralAdsNovoService;
 import br.com.digicom.modelo.AnuncioAplicacaoResultado;
 import br.com.digicom.modelo.CampanhaAds;
 import br.com.digicom.modelo.CampanhaAnuncioResultado;
@@ -77,10 +78,9 @@ public class IntegracaoMundo {
 	}
 
 	public void criaCampanhaGeral(CampanhaAds campanha) {
-		/*
-		CampanhaAplicacaoService servico = new CampanhaAplicacaoService();
+		CampanhaGeralAdsNovoService servico = new CampanhaGeralAdsNovoService();
 		servico.cria(campanha);
-		System.out.println("IdAds: " + campanha.getIdAds());
+
 		campanha.setDataPublicacao(Util.getDataAtualLoopback());
 		campanha.resetSetupCampanha();
 		campanha.resetAnuncioAplicativo();
@@ -98,7 +98,6 @@ public class IntegracaoMundo {
 		});
 		salvaAnuncioCampanha(campanha);
 		salvaPalavraChaveCampanha(campanha);
-		*/
 	}
 
 	private void salvaAnuncioCampanha(CampanhaAds campanha) {

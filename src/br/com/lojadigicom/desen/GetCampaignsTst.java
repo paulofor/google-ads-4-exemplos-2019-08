@@ -19,6 +19,7 @@ import com.google.ads.googleads.examples.utils.ArgumentNames;
 import com.google.ads.googleads.examples.utils.CodeSampleParams;
 import com.google.ads.googleads.lib.GoogleAdsClient;
 import com.google.ads.googleads.v2.errors.GoogleAdsException;
+import com.google.ads.googleads.v2.resources.Campaign;
 import com.google.ads.googleads.v2.errors.GoogleAdsError;
 import com.google.ads.googleads.v2.services.GoogleAdsRow;
 import com.google.ads.googleads.v2.services.GoogleAdsServiceClient;
@@ -91,19 +92,16 @@ public class GetCampaignsTst {
           SearchGoogleAdsRequest.newBuilder()
               .setCustomerId(Long.toString(customerId))
               .setPageSize(PAGE_SIZE)
-              .setQuery("SELECT campaign.id, campaign.name FROM campaign where campaign.id = 6455404024")
+              .setQuery("SELECT campaign.* FROM campaign where campaign.id = 9975916464")
               .build();
       // Issues the search request.
       SearchPagedResponse searchPagedResponse = googleAdsServiceClient.search(request);
       // Iterates over all rows in all pages and prints the requested field values for the campaign
       // in each row.
-      for (GoogleAdsRow googleAdsRow : searchPagedResponse.iterateAll()) {
-        System.out.printf(
-            "Campaign with ID %d and name '%s' was found.%n",
-            googleAdsRow.getCampaign().getId().getValue(),
-            googleAdsRow.getCampaign().getName().getValue()
-            );
-        System.out.println("1-" + googleAdsRow.getCampaign().getAppCampaignSetting().getAppStore().getValueDescriptor());
+      for (GoogleAdsRow row : searchPagedResponse.iterateAll()) {
+    	  Campaign campanha = row.getCampaign();
+    	  System.out.println("Campanha: " + campanha.getName());
+        //System.out.println("1-" + googleAdsRow.getCampaign().getAppCampaignSetting().getAppStore().getValueDescriptor());
       }
     }
   }
